@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gitops-api-deployment
+spec:
+  replicas: 2
+
+  selector:
+    matchLabels:
+      app: gitops-api
+
+  template:
+    metadata:
+      labels:
+        app: gitops-api
+
+    spec:
+      containers:
+        - name: gitops-api
+          image: kubernetes-gitops-platform:1.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
