@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: gitops-api
-          image: kubernetes-gitops-platform:1.0
-          imagePullPolicy: IfNotPresent
+          image: pravesh880082/kubernetes-gitops-platform:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 8000
