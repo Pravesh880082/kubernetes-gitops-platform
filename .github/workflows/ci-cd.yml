@@ -28,3 +28,13 @@ jobs:
       - name: Push Docker image
         run: |
           docker push pravesh880082/kubernetes-gitops-platform:latest
+          
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ubuntu
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            sudo k3s kubectl rollout restart deployment/gitops-api-deployment
+            sudo k3s kubectl rollout status deployment/gitops-api-deployment --timeout=120s
